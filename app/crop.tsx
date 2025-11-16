@@ -1,17 +1,16 @@
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import {
-    Image,
-    SafeAreaView,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  SafeAreaView,
 } from 'react-native';
 
 // Define the crop data
-// IMPORTANT: You must add these images to /assets/images/crops/
 const CROPS = [
   { id: 'coffee', name: 'COFFEE', image: require('../assets/images/crops/coffee.png') },
   { id: 'coconut', name: 'COCONUT', image: require('../assets/images/crops/coconut.png') },
@@ -29,8 +28,8 @@ export default function CropScreen() {
 
   const handleConfirm = () => {
     if (selectedCrop) {
-      // Navigate to the next screen (e.g., the main app tabs)
-      // router.replace('/(tabs)/home'); // Example
+      // UPDATED THIS LINE:
+      router.push('/lessons'); // Navigate to the new lessons screen
       console.log('Selected Crop:', selectedCrop);
     }
   };

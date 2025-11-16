@@ -1,7 +1,7 @@
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
 
 /**
  * A custom component for the header logo.
@@ -9,7 +9,7 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 function HeaderLogo() {
   return (
     <Image
-      source={require('../assets/images/Applogo.png')} // <-- Path fixed
+      source={require('../assets/images/Applogo.png')} // Use relative path
       style={styles.logo}
     />
   );
@@ -56,6 +56,19 @@ export default function OnboardingLayout() {
             headerShown: true,
             headerStyle: { backgroundColor: '#388e3c' },
             headerTitle: '',
+            headerShadowVisible: false,
+            headerLeft: () => <HeaderLogo />,
+            headerRight: () => <HeaderText />,
+          }}
+        />
+        {/* ADD THIS NEW SCREEN FOR THE LESSONS PAGE */}
+        <Stack.Screen
+          name="lessons"
+          options={{
+            headerShown: true,
+            headerStyle: { backgroundColor: '#388e3c' },
+            headerTitle: 'LESSONS', // Set title as per design
+            headerTitleStyle: { color: '#FFFFFF', fontWeight: 'bold' },
             headerShadowVisible: false,
             headerLeft: () => <HeaderLogo />,
             headerRight: () => <HeaderText />,
