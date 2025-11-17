@@ -163,7 +163,45 @@ export default function AppLayout() {
             headerRight: () => <AppHeaderRight />,
           }}
         />
+        <Stack.Screen
+          name="quests" // Matches the new file name: quests.tsx
+          options={{
+            headerShown: true,
+            headerTitle: 'DAILY QUESTS', // Title for the header
+            headerLeft: () => <AppHeaderLeft />,
+            headerRight: () => <AppHeaderRight />,
+          }}
+        />
+        <Stack.Screen
+          name="quiz" // For the new app/quiz.tsx file
+          options={{
+            headerShown: true,
+            headerTitle: 'QUEST QUIZ',
+            headerLeft: () => <AppHeaderLeft />,
+            headerRight: () => <AppHeaderRight />,
+          }}
+        />
 
+        {/* --- ADDED THESE SCREENS --- */}
+        <Stack.Screen
+          name="quest-complete" // For the quest-complete.tsx file
+          options={{
+            headerShown: true,
+            headerTitle: 'QUEST COMPLETE',
+            headerLeft: () => <AppHeaderLeft />,
+            headerRight: () => <AppHeaderRight />,
+          }}
+        />
+        <Stack.Screen
+          name="marketPrices" // For the new marketPrices.tsx file
+          options={{
+            headerShown: true,
+            headerTitle: 'MARKET PRICES',
+            headerLeft: () => <AppHeaderLeft />,
+            headerRight: () => <AppHeaderRight />,
+          }}
+        />
+        
       </Stack>
 
       <StatusBar style="light" />
