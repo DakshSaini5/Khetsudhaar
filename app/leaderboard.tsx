@@ -2,19 +2,19 @@ import { useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import {
-    SafeAreaView,
-    ScrollView,
-    StyleProp,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
-    ViewStyle,
+  SafeAreaView,
+  ScrollView,
+  StyleProp,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  ViewStyle,
 } from 'react-native';
 
 // --- Import SVG Assets ---
-import Coin from '../assets/images/coin.svg';
-import LeafIcon from '../assets/images/leafIcon.svg';
+import Qcoin from '../assets/images/Qcoin.svg'; // <-- 1. IMPORT YOUR NEW ICON
+import Coin from '../assets/images/coin.svg'; // This is for the '1.5X' and '1X'
 import WinMascot from '../assets/images/winMascot.svg';
 
 const PIXEL_FONT = 'monospace';
@@ -68,7 +68,7 @@ const RankRow = ({
       </View>
       <Text style={styles.rankName}>{name}</Text>
       <View style={styles.scoreContainer}>
-        <LeafIcon width={24} height={24} />
+        <Qcoin width={24} height={24} /> {/* <-- 2. USE YOUR NEW ICON HERE */}
         <Text style={styles.rankScore}>{score}</Text>
       </View>
     </TouchableOpacity>
