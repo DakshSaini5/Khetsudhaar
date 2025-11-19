@@ -1,28 +1,11 @@
 import { FontAwesome5 } from '@expo/vector-icons';
 import { Stack, useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity } from 'react-native';
 
-// --- STYLE 1: PRE-LOGIN HEADER (Logo Left, Text Right) ---
-function OnboardingHeaderLeft() {
-  return (
-    <Image
-      source={require('../assets/images/Applogo.png')}
-      style={styles.logoLeft}
-    />
-  );
-}
-function OnboardingHeaderRight() {
-  return (
-    <View style={styles.textRightContainer}>
-      <Text style={styles.headerKhet}>KHET</Text>
-      <Text style={styles.headerSudhar}>सुधार</Text>
-    </View>
-  );
-}
+// --- FUNCTIONS FOR THE CONSISTENT APP HEADER ---
 
-// --- STYLE 2: POST-LOGIN HEADER (Profile Left, Logo Right) ---
+// Profile Icon (for post-login screens)
 function AppHeaderLeft() {
   const router = useRouter();
   return (
@@ -31,12 +14,14 @@ function AppHeaderLeft() {
     </TouchableOpacity>
   );
 }
+
+// Logo (for all screens)
 function AppHeaderRight() {
   const router = useRouter();
   return (
     <TouchableOpacity onPress={() => router.push('/dashboard')}>
       <Image
-        source={require('../assets/images/Applogo.png')}
+        source={require('@/assets/images/Applogo.png')}
         style={styles.logoRight}
       />
     </TouchableOpacity>
@@ -49,75 +34,59 @@ export default function AppLayout() {
     <>
       <Stack
         screenOptions={{
-          headerShown: false,
-          contentStyle: { backgroundColor: '#151718' },
-          headerStyle: { backgroundColor: '#388e3c' },
-          headerShadowVisible: false,
-          headerTintColor: '#FFFFFF',
-        }}
-      >
+          // Global header style
+          headerStyle: {
+            backgroundColor: '#388e3c', // Khetsudhaar green
+          },
+          headerTintColor: '#fff', // White text/icons
+          headerShadowVisible: false, // Clean flat look
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
         
-        {/* --- SCREENS WITH NO HEADER --- */}
-        <Stack.Screen name="index" />
-        <Stack.Screen name="login" />
-
-        {/* --- ONBOARDING & PRE-LOGIN SCREENS --- */}
+        {/* --- PRE-LOGIN SCREENS --- */}
+        {/* These screens have NO profile icon */}
+        <Stack.Screen
+          name="login"
+          options={{
+            headerShown: true,
+            headerTitle: 'LOGIN',
+            headerLeft: () => null, // No profile icon
+            headerRight: () => <AppHeaderRight />,
+          }}
+        />
         <Stack.Screen
           name="language"
           options={{
             headerShown: true,
-            headerTitle: '',
-            headerLeft: () => <OnboardingHeaderLeft />,
-            headerRight: () => <OnboardingHeaderRight />,
+            headerTitle: 'LANGUAGE',
+            headerLeft: () => null, // No profile icon
+            headerRight: () => <AppHeaderRight />,
           }}
         />
         <Stack.Screen
           name="crop"
           options={{
             headerShown: true,
-            headerTitle: '',
-            headerLeft: () => <OnboardingHeaderLeft />,
-            headerRight: () => <OnboardingHeaderRight />,
+            headerTitle: 'CHOOSE CROP',
+            headerLeft: () => null, // No profile icon
+            headerRight: () => <AppHeaderRight />,
           }}
         />
+        
+        {/* --- POST-LOGIN SCREENS --- */}
+        {/* These screens HAVE the profile icon */}
         <Stack.Screen
-          name="lesson/[id]"
+          name="dashboard"
           options={{
             headerShown: true,
-            headerTitle: 'LESSON',
-            headerLeft: () => <OnboardingHeaderLeft />,
-            headerRight: () => <OnboardingHeaderRight />,
+            headerTitle: 'DASHBOARD',
+            headerLeft: () => <AppHeaderLeft />,
+            headerRight: () => <AppHeaderRight />,
           }}
         />
-        <Stack.Screen
-          name="quiz/[id]"
-          options={{
-            headerShown: true,
-            headerTitle: 'LESSON Q',
-            headerLeft: () => <OnboardingHeaderLeft />,
-            headerRight: () => <OnboardingHeaderRight />,
-          }}
-        />
-        <Stack.Screen
-          name="complete/[id]"
-          options={{
-            headerShown: true,
-            headerTitle: '',
-            headerLeft: () => <OnboardingHeaderLeft />,
-            headerRight: () => <OnboardingHeaderRight />,
-          }}
-        />
-        <Stack.Screen
-          name="reward/[id]"
-          options={{
-            headerShown: true,
-            headerTitle: '',
-            headerLeft: () => <OnboardingHeaderLeft />,
-            headerRight: () => <OnboardingHeaderRight />,
-          }}
-        />
-
-        {/* --- MAIN APP & POST-LOGIN SCREENS --- */}
         <Stack.Screen
           name="lessons"
           options={{
@@ -128,19 +97,20 @@ export default function AppLayout() {
           }}
         />
         <Stack.Screen
-          name="profile"
+          name="lesson/[id]"
           options={{
             headerShown: true,
-            headerTitle: 'PROFILE',
+            headerTitle: 'LESSON DETAIL',
             headerLeft: () => <AppHeaderLeft />,
             headerRight: () => <AppHeaderRight />,
           }}
         />
+        
         <Stack.Screen
-          name="dashboard"
+          name="profile"
           options={{
             headerShown: true,
-            headerTitle: 'DASHBOARD',
+            headerTitle: 'PROFILE',
             headerLeft: () => <AppHeaderLeft />,
             headerRight: () => <AppHeaderRight />,
           }}
@@ -163,7 +133,51 @@ export default function AppLayout() {
             headerRight: () => <AppHeaderRight />,
           }}
         />
-
+        <Stack.Screen
+          name="quests" 
+          options={{
+            headerShown: true,
+            headerTitle: 'DAILY QUESTS', 
+            headerLeft: () => <AppHeaderLeft />,
+            headerRight: () => <AppHeaderRight />,
+          }}
+        />
+        <Stack.Screen
+          name="marketPrices"
+          options={{
+            headerShown: true,
+            headerTitle: 'MARKET PRICES',
+            headerLeft: () => <AppHeaderLeft />,
+            headerRight: () => <AppHeaderRight />,
+          }}
+        />
+        <Stack.Screen
+          name="quest-details"
+          options={{
+            headerShown: true,
+            headerTitle: 'QUEST DETAILS', 
+            headerLeft: () => <AppHeaderLeft />,
+            headerRight: () => <AppHeaderRight />,
+          }}
+        />
+        <Stack.Screen
+          name="quest-complete" 
+          options={{
+            headerShown: true,
+            headerTitle: 'QUEST COMPLETE',
+            headerLeft: () => <AppHeaderLeft />,
+            headerRight: () => <AppHeaderRight />,
+          }}
+        />
+        <Stack.Screen
+          name="quest-quiz" 
+          options={{
+            headerShown: true,
+            headerTitle: 'QUEST QUIZ',
+            headerLeft: () => <AppHeaderLeft />,
+            headerRight: () => <AppHeaderRight />,
+          }}
+        />
       </Stack>
 
       <StatusBar style="light" />
@@ -172,27 +186,6 @@ export default function AppLayout() {
 }
 
 const styles = StyleSheet.create({
-  logoLeft: {
-    width: 40,
-    height: 40,
-    marginLeft: 15,
-  },
-  textRightContainer: {
-    marginRight: 15,
-    alignItems: 'flex-end',
-  },
-  headerKhet: {
-    color: '#fff',
-    fontSize: 20,
-    fontWeight: '900',
-    letterSpacing: 1,
-  },
-  headerSudhar: {
-    color: '#fff',
-    fontSize: 20,
-    fontWeight: '500',
-    letterSpacing: 0.5,
-  },
   logoRight: {
     width: 40,
     height: 40,

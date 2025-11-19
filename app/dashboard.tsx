@@ -16,7 +16,7 @@ import {
 import Coin from '../assets/images/coin.svg';
 import LeaderBoard from '../assets/images/LeaderBoard.svg';
 import Lessons from '../assets/images/Lessons.svg';
-import MarketPrice from '../assets/images/market-price.svg'; // <-- 1. ADDED THIS IMPORT
+import MarketPrice from '../assets/images/market-price.svg';
 import MascotFarmer from '../assets/images/MascotFarmer.svg';
 import Quest from '../assets/images/Quest.svg';
 import Reward from '../assets/images/Reward.svg';
@@ -97,14 +97,14 @@ export default function DashboardScreen() {
             <HubButton
               label="QUESTS"
               icon={<Quest width={80} height={80} />}
-              onPress={() => console.log('Navigate to Quests')}
+              onPress={() => router.push('/quests')} // <-- UPDATED: Links directly to /quests
               style={[styles.buttonSquare, styles.questsButton]}
               textStyle={styles.squareButtonText}
             />
             <HubButton
               label="LEADERBOARD"
               icon={<LeaderBoard width={80} height={80} />}
-              onPress={() => router.push('/leaderboard' as any)} // <-- THIS IS THE CHANGE
+              onPress={() => router.push('/leaderboard' as any)}
               style={[styles.buttonSquare, styles.leaderboardButton]}
               textStyle={styles.squareButtonText}
             />
@@ -135,14 +135,15 @@ export default function DashboardScreen() {
             />
           </View>
           {/* --- NEW MARKET PRICES TILE --- */}
-          <View style={styles.gridRow}>
-            <HubButton
-              label="MARKET PRICES"
-              icon={<MarketPrice width={80} height={80} />} // <-- 2. USED THE NEW ICON
-              onPress={() => console.log('Navigate to Market Prices')}
-              style={[styles.buttonRect, styles.marketButton]}
-              textStyle={styles.rectButtonText}
-            />
+         <View style={styles.gridRow}>
+            // In dashboard.tsx
+<HubButton
+  label="MARKET PRICES"
+  icon={<MarketPrice width={80} height={80} />}
+  onPress={() => router.push('/marketPrices' as any)} // <-- FIX
+  style={[styles.buttonRect, styles.marketButton]}
+  textStyle={styles.rectButtonText}
+/>
           </View>
         </View>
       </ScrollView>
