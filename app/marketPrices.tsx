@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   Image,
+  Platform,
   RefreshControl,
   SafeAreaView,
   ScrollView,
@@ -25,7 +26,7 @@ const RiceImg = require('../assets/images/crops/rice.png');
 const GingerImg = require('../assets/images/crops/ginger.png');
 const CashewImg = require('../assets/images/crops/cashew.png');
 
-import { Platform } from 'react-native';
+
 // Uses San Francisco on iOS and Roboto on Android
 const PIXEL_FONT = Platform.OS === 'ios' ? 'System' : 'Roboto';
 
